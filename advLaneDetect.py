@@ -363,11 +363,12 @@ def advLaneDetectionPipeline(inputImage):
     #
     # plt.show()
 
-    if left_fit == None or right_fit == None:
-        leftFitX, rightFitX, ploty = slidingWindows(binary_warped)
-    else:
-        leftFitX, rightFitX, ploty = skipSlidingWindow(binary_warped)
+    # if left_fit == None or right_fit == None:
+    #     leftFitX, rightFitX, ploty = slidingWindows(binary_warped)
+    # else:
+    #     leftFitX, rightFitX, ploty = skipSlidingWindow(binary_warped)
 
+    leftFitX, rightFitX, ploty = slidingWindows(binary_warped)
     warp_zero = np.zeros_like(warped).astype(np.uint8)
     color_warp = np.dstack((warp_zero, warp_zero, warp_zero))
 
@@ -528,23 +529,23 @@ def main(args):
     cs = CameraSetup()
     cs.cameraCalibration(imagePaths, (9, 6))
 
-    testDistortedImage = plt.imread('camera_cal/calibration1.jpg')
-    testRectifiedImage = cs.rectifyImage(testDistortedImage)
-    plot2Images(testDistortedImage, testRectifiedImage, 'Original Image', 'Rectified Image')
+    # testDistortedImage = plt.imread('camera_cal/calibration1.jpg')
+    # testRectifiedImage = cs.rectifyImage(testDistortedImage)
+    # plot2Images(testDistortedImage, testRectifiedImage, 'Original Image', 'Rectified Image')
 
     ip = ImageProc()
 
-    test_image_path = 'test_images/straight_lines1.jpg'
+    test_image_path = 'test_images/test2.jpg'
     rgbImage = plt.imread(test_image_path)
     test_result = process_image(rgbImage)
-#    plot2Images(rgbImage, test_result, 'Original Image', 'Rectified and Processed Image')
+    plot2Images(rgbImage, test_result, 'Original Image', 'Rectified and Processed Image')
 
-#    plotImage(test_result, 'Lane Detection')
+    plotImage(test_result, 'Lane Detection')
 
-    # video_name = 'project_video_out1.mp4'
-    # clip = VideoFileClip('project_video.mp4')
-    # white_clip = clip.fl_image(process_image)  # NOTE: this function expects color images!!
-    # white_clip.write_videofile(video_name, audio=False)
+    video_name = 'challenge_video_out2.mp4'
+    clip = VideoFileClip('challenge_video.mp4')
+    white_clip = clip.fl_image(process_image)  # NOTE: this function expects color images!!
+    white_clip.write_videofile(video_name, audio=False)
 
     print('Destroying all the windows...')
     cv2.destroyAllWindows()
