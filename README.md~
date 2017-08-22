@@ -111,7 +111,7 @@ The resultant points and the polynomial line from the step above are used to dra
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result][video1]
 
 ---
 
@@ -119,4 +119,17 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.
+
+##### Thresholding
+AS mentioned above, I used a combination of R-channel and Sobel X thresholding. This worked fine for the project_video, however, there are quite a lot of portions in the challenge_video.mp4 and the harder_challenge_video.mp4 where this implementation fails. In the challenge video, there are following places where this fails. Firstly, the lane has two colors, and the thresholding algorithm detects the change in the color as a line. As this patch line between the two color moves closer to the lane lines, the detection begins to fail. Secondly, the divider of the road casts a shadow and there are sections of the highway where these shadows are close to the yellow lane lines, which means they are in the region of interest. Thirdly, when the car goes under the bridge, the shadow of the bridge messes up the lane detection. In a similar way, there are portions in the harder_challenge_video.mp4 where the road is too bright as the car goes in between the shades. All these problems are related to thresholding. A better thresholding technique needs to be explored for that.
+
+##### Curvature of the road
+This is a problem seen more in the harder_challenge video. The road curvature at many portions of this video is too high for the algorithm to handle. As a result one of the lanes goes out of the region of interest. For that the region of interest needs to be tweaked so that both the lanes are visible in the perspective transform. In extreme cases, the algorithm may have to make some assumptions about the estimated position of the road line that is not visible in the camera.
+
+Following are links to the performance of the algorithm on the challenge videos:
+
+[link to the challenge video output][video2]
+ 
+[link to the harder challenge video output][video3]
+ 
