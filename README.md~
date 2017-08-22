@@ -107,6 +107,8 @@ The resultant points and the polynomial line from the step above are used to dra
 
 ![alt text][image7]
 
+![alt text][image8]
+
 ---
 
 ### Pipeline (video)

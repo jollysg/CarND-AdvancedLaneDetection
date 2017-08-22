@@ -131,6 +131,9 @@ AS mentioned above, I used a combination of R-channel and Sobel X thresholding. 
 ##### Curvature of the road
 This is a problem seen more in the harder_challenge video. The road curvature at many portions of this video is too high for the algorithm to handle. As a result one of the lanes goes out of the region of interest. For that the region of interest needs to be tweaked so that both the lanes are visible in the perspective transform. In extreme cases, the algorithm may have to make some assumptions about the estimated position of the road line that is not visible in the camera.
 
+##### Skipping of sliding windows for detecting lane lines
+In the implementation, the algorithm runs a sliding window initially to identify the lane lines. Once the lines are detected, it skips the sliding window once the position of the lanes are identified. However, there are portions of both the challenge videos where the algorithm is not able to detect any lanes due to the reasons cited above. As a result, the algorithm should fall back to finding the lanes using the sliding windows for the next frames. However, the current check for whether the sliding window should be used or skipped is very weak. As a result, once the algorithm is not able to detect any lanes in any of the frames, the detection in the subsequent frames fails. This check was happening in the line 366 to 369 of the advLaneDetectionPipeline function in the advLaneDectection.py file. However, due to this problem, this check has been disabled and the algorithm carries out the sliding window search in all the frames. A better check needs to be implemented over here. 
+
 Following are links to the performance of the algorithm on the challenge videos:
 
 [link to the challenge video output][video2]
