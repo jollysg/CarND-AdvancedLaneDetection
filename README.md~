@@ -23,6 +23,8 @@ The goals / steps of this project are the following:
 [image7]: ./output_images/laneDetectionDemonstration.png "Lane detection from a road image"
 [image8]: ./output_images/laneDetectionExample.png "Lane Detection Result"
 [video1]: ./output_images/project_video_out1.mp4 "Video"
+[video2]: ./output_images/challenge_video_out2.mp4 "Video"
+[video3]: ./output_images/harder_challenge_video_out2.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
